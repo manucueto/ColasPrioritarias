@@ -1,5 +1,6 @@
 import flet as ft
 import simpy
+import time
 
 class Cliente:
     def __init__(self, tipo, nombre):
@@ -43,11 +44,39 @@ def main(page: ft.Page):
         lista_clientes_text.value = lista_clientes_str
 
     def simular_cola(e):
-        # Ejecutamos la simulación de la cola aquí
-        # (debes implementar la lógica de la simulación)
+          # Tomamos el primer cliente de la lista
+        # Evaluamos la lista de clientes y atendemos a los clientes según su prioridad
+        for i in range(len(cola_clientes)-1 ):
+            cliente_actual = cola_clientes[i]
+            if (cliente_actual.tipo == 2):
+                # Atendemos al cliente de tipo 2
+                time.sleep(4)
+                output_text.value = f"Cliente {cliente_actual.nombre} fue atendido."
+                cola_clientes.remove(cliente_actual)
+                actualizar_lista_clientes()
+                page.update()
+        for i in range(len(cola_clientes)-1):
+            cliente_actual = cola_clientes[i]
+            if (cliente_actual.tipo == 1):
+                # Atendemos al cliente de tipo 1
+                time.sleep(4)
+                output_text.value = f"Cliente {cliente_actual.nombre} fue atendido."
+                cola_clientes.remove(cliente_actual)
+                actualizar_lista_clientes()
+                page.update()
+        for i in range(len(cola_clientes)-1):
+            cliente_actual = cola_clientes[i]
+            if (cliente_actual.tipo == 0):
+                # Atendemos al cliente de tipo 0
+                time.sleep(4)
+                output_text.value = f"Cliente {cliente_actual.nombre} fue atendido."
+                cola_clientes.remove(cliente_actual)
+                actualizar_lista_clientes()
+                page.update()
 
-        # Actualizamos el texto de salida
-        output_text.value = "Simulación de la cola ejecutada."
+        # Mostramos mensaje de finalización
+        actualizar_lista_clientes()
+        output_text.value = "Simulación de la cola terminada."
         page.update()
 
     output_text = ft.Text()
