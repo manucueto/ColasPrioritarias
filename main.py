@@ -44,7 +44,7 @@ def main(page: ft.Page):
         lista_clientes_str = " -- ".join(f"{cliente.nombre} (Tipo {cliente.tipo})" for cliente in reversed(cola_clientes))
         lista_clientes_text.value = lista_clientes_str
 
-    def limpiar():
+    def limpiar(e):
         # Limpiamos la lista de clientes
         cola_clientes.clear()
         # Actualizamos la lista de clientes
@@ -63,7 +63,7 @@ def main(page: ft.Page):
                 cola_clientes.remove(cliente_actual)
                 actualizar_lista_clientes()
                 page.update()
-        for i in range(len(cola_clientes)-1):
+        for i in range(len(cola_clientes)-1, -1, -1):
             cliente_actual = cola_clientes[i]
             if (cliente_actual.tipo == 1):
                 # Atendemos al cliente de tipo 1
@@ -72,7 +72,7 @@ def main(page: ft.Page):
                 cola_clientes.remove(cliente_actual)
                 actualizar_lista_clientes()
                 page.update()
-        for i in range(len(cola_clientes)-1):
+        for i in range(len(cola_clientes)-1, -1, -1):
             cliente_actual = cola_clientes[i]
             if (cliente_actual.tipo == 0):
                 # Atendemos al cliente de tipo 0
